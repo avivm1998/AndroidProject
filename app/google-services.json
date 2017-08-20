@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1097260385814",
+    "firebase_url": "https://kawabanga-b69e1.firebaseio.com",
+    "project_id": "kawabanga-b69e1",
+    "storage_bucket": "kawabanga-b69e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1097260385814:android:c3881ee15454374f",
+        "android_client_info": {
+          "package_name": "com.kawabanga"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1097260385814-qvv7mma3n1hbh8u0e49qqdd087250gct.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kawabanga",
+            "certificate_hash": "30da9be63565c2751cc7fb539dd796d4888ea827"
+          }
+        },
+        {
+          "client_id": "1097260385814-51v5dklg6g7leq119u3l9huk62kohauo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWVYKaGitakLyPALxpWsOKjg5iEGwqcsQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1097260385814-51v5dklg6g7leq119u3l9huk62kohauo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
