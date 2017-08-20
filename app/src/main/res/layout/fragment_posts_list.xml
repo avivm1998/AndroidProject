@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context="com.example.avivmoran.kawabanga.PostsFragment">
+    tools:context="com.kawabanga.PostsListFragment">
 
     <TextView
         android:id="@+id/account_username"

@@ -15,7 +15,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
-            android:textAppearance="?attr/textAppearanceListItem"
             android:text="NAME"/>
 
         <TextView
@@ -24,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
-            android:textAppearance="?attr/textAppearanceListItem"
+
             android:text="TEST TEST TEST TEST"/>
 
     </LinearLayout>

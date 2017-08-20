@@ -14,7 +14,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:textAppearance="?attr/textAppearanceListItem"
             android:text="\@TEST"/>
 
         <TextView
@@ -23,23 +22,33 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:layout_margin="@dimen/text_margin"
-            android:textAppearance="?attr/textAppearanceListItem"
             android:text="150"/>
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/post_image"
+    <FrameLayout
         android:layout_width="350dp"
-        android:layout_height="350dp"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_height="350dp">
+
+        <ImageView
+            android:id="@+id/post_image"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:src="@mipmap/ic_launcher"/>
+
+        <ProgressBar
+            android:id="@+id/post_progressbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+    </FrameLayout>
+
 
     <TextView
         android:id="@+id/post_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem"
         android:text="TEST TEST TEST TEST"/>
 </LinearLayout>

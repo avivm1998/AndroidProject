@@ -1,4 +1,4 @@
-package com.example.avivmoran.kawabanga;
+package com.kawabanga;
 
 import org.junit.Test;
 
