@@ -1,0 +1,87 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layoutDirection="rtl"
+    tools:context="com.kawabanga.SignInFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Hungry ?"
+        android:textSize="50dp"
+        android:layout_gravity="bottom"
+        android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="אימייל"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/mail_signin"
+            android:layout_width="200dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="סיסמא"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/password_signin"
+            android:layout_width="180dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:password="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/signin_signin"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="התחבר" />
+
+        <Button
+            android:id="@+id/register_signin"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="הירשם" />
+    </LinearLayout>
+
+</LinearLayout>
