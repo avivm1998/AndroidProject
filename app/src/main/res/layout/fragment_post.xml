@@ -13,16 +13,23 @@
             android:id="@+id/post_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="\@TEST"/>
+            android:layout_margin="@dimen/text_margin" />
+
+        <ImageButton
+            android:id="@+id/post_like_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_thumb_up"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="250dp"/>
 
         <TextView
             android:id="@+id/post_likes"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:layout_margin="@dimen/text_margin"
-            android:text="150"/>
+            android:layout_margin="@dimen/text_margin"/>
 
     </LinearLayout>
 
@@ -44,11 +51,16 @@
             android:visibility="gone"/>
     </FrameLayout>
 
-
     <TextView
         android:id="@+id/post_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="TEST TEST TEST TEST"/>
+        android:layout_margin="@dimen/text_margin"/>
+
+    <Button
+        android:id="@+id/post_delete_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DELETE POST"
+        android:visibility="gone"/>
 </LinearLayout>

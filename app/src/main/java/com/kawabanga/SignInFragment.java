@@ -50,11 +50,11 @@ public class SignInFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
 
-        final EditText mailET = (EditText) view.findViewById(R.id.mail_signin);
-        final EditText passwordET = (EditText) view.findViewById(R.id.password_signin);
+        final EditText mailET = (EditText) view.findViewById(R.id.signin_email);
+        final EditText passwordET = (EditText) view.findViewById(R.id.signin_password);
 
-        Button reisterB = (Button) view.findViewById(R.id.register_signin);
-        Button signinB = (Button) view.findViewById(R.id.signin_signin);
+        Button reisterB = (Button) view.findViewById(R.id.signin_register_button);
+        Button signinB = (Button) view.findViewById(R.id.signin_login_button);
 
         reisterB.setOnClickListener(new View.OnClickListener() {
             @Override

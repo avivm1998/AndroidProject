@@ -9,10 +9,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by bugsec on 20/08/2017.
- */
-
 public class FirebaseUser {
 
     public void addUser(User user) {

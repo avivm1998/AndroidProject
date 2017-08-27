@@ -8,13 +8,10 @@ import android.webkit.URLUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.Collections;
 import java.util.List;
 
 import static com.kawabanga.model.ModelFiles.saveImageToFile;
-
-/**
- * Created by bugsec on 20/08/2017.
- */
 
 public class ModelPost
 {
@@ -70,11 +67,8 @@ public class ModelPost
             return PostSql.getAllPostsByOwnerID(modelSql.getReadableDatabase(),id);
         }
 
-        public Post getPost(String postID) {
-            return PostSql.getPost(modelSql.getReadableDatabase(),postID);
-        }
-
-        public List<Post> getAllPost() {
+        public List<Post> getAllPosts() {
+            Log.d("TAG", "model post getallposts");
             return PostSql.getAllPosts(modelSql.getReadableDatabase());
         }
 
@@ -134,7 +128,7 @@ public interface GetImageListener{
     void onFail();
 }
     public void getImage(final String url, final GetImageListener listener) {
-        //check if image exsist localy
+        //check if the image exists locally
         final String fileName = URLUtil.guessFileName(url, null, null);
         ModelFiles.loadImageFromFileAsynch(fileName, new ModelFiles.LoadImageFromFileAsynch() {
             @Override

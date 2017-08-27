@@ -1,15 +1,12 @@
 package com.kawabanga.model;
 
-/**
- * Created by bugsec on 20/08/2017.
- */
-
 public class Post {
-    public String id ;
-    public String name ;
+    public String id;
     public String description;
     public String ownerID;
-    public String imageURL="" ;
-    public int isRemoved ;
+    public String likes = "0";
+    public String likers = "";
+    public String imageURL = "";
+    public int isRemoved;
     public double lastUpdateDate;
 }

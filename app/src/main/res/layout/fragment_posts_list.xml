@@ -11,7 +11,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="\@TEST"
         android:visibility="gone"/>
 
     <TextView
@@ -20,7 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="20dp"
-        android:text="TEST TEST TEST TEST"
         android:visibility="gone"/>
 
     <EditText
@@ -29,7 +27,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="20dp"
-        android:text="TEST TEST TEST TEST"
         android:visibility="gone"/>
 
     <FrameLayout

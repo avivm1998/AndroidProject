@@ -22,47 +22,21 @@ import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by bugsec on 20/08/2017.
- */
-
 public class FirebasePost {
     public void addPost(Post post) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(PostSql.POST_TABLE);
         Map<String, Object> value = new HashMap<>();
         value.put(PostSql.POST_ID, post.id);
-        value.put(PostSql.POST_NAME, post.name);
         value.put(PostSql.POST_DESCRIPTION, post.description);
         value.put(PostSql.POST_OWNER_ID, post.ownerID);
+        value.put(PostSql.POST_LIKES, post.likes);
+        value.put(PostSql.POST_LIKERS, post.likers);
         value.put(PostSql.POST_IS_REMOVED, post.isRemoved);
         value.put(PostSql.POST_LAST_UPDATE_DATE, ServerValue.TIMESTAMP);
         value.put(PostSql.POST_IMAGE_URL, post.imageURL);
 
         myRef.child(post.id).setValue(value);
-    }
-
-    interface GetPostCallback {
-        void onComplete(Post post);
-
-        void onCancel();
-    }
-
-    public void getPost(String stId, final GetPostCallback callback) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference(PostSql.POST_TABLE);
-        myRef.child(stId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Post post = dataSnapshot.getValue(Post.class);
-                callback.onComplete(post);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                callback.onCancel();
-            }
-        });
     }
 
     interface RegisterPostUpdatesCallback {

@@ -1,6 +1,7 @@
 package com.kawabanga;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -50,7 +51,7 @@ public class UploadFragment extends Fragment {
     ImageView image;
     private Lock l = new ReentrantLock();
 
-    private OnFragmentInteractionListener mListener;
+    //private OnFragmentInteractionListener mListener;
 
     public UploadFragment() {
         // Required empty public constructor
@@ -64,7 +65,6 @@ public class UploadFragment extends Fragment {
      * @param post_id the post's id.
      * @return A new instance of fragment UploadFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static UploadFragment newInstance(String username, String post_id) {
         UploadFragment fragment = new UploadFragment();
         Bundle args = new Bundle();
@@ -120,9 +120,14 @@ public class UploadFragment extends Fragment {
                         l.lock();
 
                         UploadFragment.this.post.imageURL = url;
-                        ModelPost.instance.addRestaurant(UploadFragment.this.post);
+                        ModelPost.instance.addPost(UploadFragment.this.post);
                         progressBar.setVisibility(GONE);
-                        UploadFragment.this.getActivity().getFragmentManager().popBackStack();
+                        //UploadFragment.this.getActivity().getFragmentManager().popBackStack();
+
+                        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                        PostsListFragment postsListFragment = PostsListFragment.newInstance(null);
+                        fragmentTransaction.replace(R.id.content, postsListFragment);
+                        fragmentTransaction.commit();
 
                         l.unlock();
                     }
@@ -146,39 +151,32 @@ public class UploadFragment extends Fragment {
         }
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
+        /*if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
-        }
+        }*/
     }
 
     @Override
     public void onAttach(Activity context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
+        /*if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
-        }
+        }*/
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        //mListener = null;
     }
 
     private void dispatchTakePictureIntent() {
@@ -193,20 +191,5 @@ public class UploadFragment extends Fragment {
     public static String getTimeValue(){
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
         return  df.format(Calendar.getInstance().getTime());
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }
