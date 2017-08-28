@@ -122,12 +122,12 @@ public class UploadFragment extends Fragment {
                         UploadFragment.this.post.imageURL = url;
                         ModelPost.instance.addPost(UploadFragment.this.post);
                         progressBar.setVisibility(GONE);
-                        //UploadFragment.this.getActivity().getFragmentManager().popBackStack();
+                        UploadFragment.this.getActivity().getFragmentManager().popBackStack();
 
-                        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                        /*FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                         PostsListFragment postsListFragment = PostsListFragment.newInstance(null);
                         fragmentTransaction.replace(R.id.content, postsListFragment);
-                        fragmentTransaction.commit();
+                        fragmentTransaction.commit();*/
 
                         l.unlock();
                     }
