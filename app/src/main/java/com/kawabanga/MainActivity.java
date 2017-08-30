@@ -3,24 +3,25 @@ package com.kawabanga;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.Manifest;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.kawabanga.model.ModelPost;
 import com.kawabanga.model.ModelUser;
 import com.kawabanga.model.User;
 
-public class MainActivity extends Activity { // implements UploadFragment.OnFragmentInteractionListener{
+public class MainActivity extends Activity implements UploadFragment.UploadFragmentListener {
     public static User user;
     public static FirebaseAuth mAuth ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("TAG", "main activity oncreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -40,7 +41,7 @@ public class MainActivity extends Activity { // implements UploadFragment.OnFrag
         });
 
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        PostsListFragment postsListFragment = PostsListFragment.newInstance(null);
+        PostsListFragment postsListFragment = PostsListFragment.newInstance(null, mAuth.getCurrentUser().getUid());
         fragmentTransaction.replace(R.id.content, postsListFragment);
         fragmentTransaction.addToBackStack("");
         fragmentTransaction.commit();
@@ -61,20 +62,19 @@ public class MainActivity extends Activity { // implements UploadFragment.OnFrag
 
         switch (item.getItemId()) {
             case R.id.navigation_home:
-                PostsListFragment postsListFragment = PostsListFragment.newInstance(null);
+                PostsListFragment postsListFragment = PostsListFragment.newInstance(null, mAuth.getCurrentUser().getUid());
                 fragmentTransaction.replace(R.id.content, postsListFragment);
-                //fragmentTransaction.addToBackStack("");
                 fragmentTransaction.commit();
                 return true;
 
             case R.id.navigation_upload:
-                UploadFragment uploadFragment = UploadFragment.newInstance("", "");
+                UploadFragment uploadFragment = UploadFragment.newInstance(user.id);
                 fragmentTransaction.replace(R.id.content, uploadFragment);
                 fragmentTransaction.commit();
                 return true;
 
             case R.id.navigation_account:
-                PostsListFragment userPostListFragment = PostsListFragment.newInstance(user.id);
+                PostsListFragment userPostListFragment = PostsListFragment.newInstance(user.id, mAuth.getCurrentUser().getUid());
                 fragmentTransaction.replace(R.id.content, userPostListFragment);
                 fragmentTransaction.commit();
                 return true;
@@ -90,5 +90,13 @@ public class MainActivity extends Activity { // implements UploadFragment.OnFrag
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onUpload() {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        PostsListFragment postsListFragment = PostsListFragment.newInstance(null, mAuth.getCurrentUser().getUid());
+        fragmentTransaction.replace(R.id.content, postsListFragment);
+        fragmentTransaction.commit();
     }
 }

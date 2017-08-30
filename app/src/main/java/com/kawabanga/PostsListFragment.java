@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.kawabanga.model.FirebaseUser;
 import com.kawabanga.model.ModelPost;
 import com.kawabanga.model.ModelUser;
 import com.kawabanga.model.Post;
@@ -35,9 +36,6 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link PostsListFragment.PostsListFragmentListener} interface
- * to handle interaction events.
  * Use the {@link PostsListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
@@ -47,7 +45,10 @@ public class PostsListFragment extends Fragment {
     PostListAdapter adapter;
 
     private static final String USER_ID = "user_id";
+    private static final String CURRENT_USER = "current_user";
+
     private String user_id;
+    private String current_user;
 
     public PostsListFragment() {
         Log.d("TAG", "post list frag ctor");
@@ -59,28 +60,27 @@ public class PostsListFragment extends Fragment {
      *
      * @return A new instance of fragment PostsListFragment.
      */
-    public static PostsListFragment newInstance(String user_id) {
-        Log.d("TAG", "post list frag newinstance");
+    public static PostsListFragment newInstance(String user_id, String current_user) {
         PostsListFragment fragment = new PostsListFragment();
         Bundle args = new Bundle();
         args.putString(USER_ID, user_id);
+        args.putString(CURRENT_USER, current_user);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.d("TAG", "post list frag oncreate");
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             user_id = getArguments().getString(USER_ID);
+            current_user = getArguments().getString(CURRENT_USER);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         //inflate the layout for this fragment
-        Log.d("TAG", "post list oncreateview");
         View view = inflater.inflate(R.layout.fragment_posts_list, container, false);
 
         if(user_id == null)
@@ -88,8 +88,6 @@ public class PostsListFragment extends Fragment {
 
         else
             data = ModelPost.instance.getAllPostsByOwnerID(user_id);
-
-        Collections.reverse(data);
 
         list = (ListView) view.findViewById(R.id.posts_list);
         adapter = new PostListAdapter();
@@ -101,14 +99,7 @@ public class PostsListFragment extends Fragment {
 
     @Override
     public void onAttach(Context context) {
-        Log.d("TAG", "post list frag onattach");
         super.onAttach(context);
-        /*if (context instanceof PostsListFragmentListener) {
-            mListener = (PostsListFragmentListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
 
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
@@ -117,14 +108,7 @@ public class PostsListFragment extends Fragment {
 
     @Override
     public void onAttach(Activity context) {
-        Log.d("TAG", "post list frag onattach");
         super.onAttach(context);
-        /*if (context instanceof PostsListFragmentListener) {
-            mListener = (PostsListFragmentListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
 
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
@@ -136,7 +120,6 @@ public class PostsListFragment extends Fragment {
         Log.d("TAG", "post list frag ondetach");
         super.onDetach();
         EventBus.getDefault().unregister(this);
-        //mListener = null;
     }
 
     //update the posts list
@@ -221,16 +204,16 @@ public class PostsListFragment extends Fragment {
             like_post.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!post.likers.contains(FirebaseAuth.getInstance().getCurrentUser().getUid())) { // check if not liked already
+                    if(!post.likers.contains(current_user)) { // check if not liked already
                         Integer likes = Integer.valueOf(post.likes) + 1;
                         post.likes = likes.toString();
 
                         if(post.likers.equals("")) {
-                            post.likers = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            post.likers = current_user;
                         }
 
                         else {
-                            post.likers += "__,__" + FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            post.likers += "__,__" + current_user;
                         }
 
                         ModelPost.instance.updatePost(post);
@@ -242,7 +225,7 @@ public class PostsListFragment extends Fragment {
                 }
             });
 
-            if(FirebaseAuth.getInstance().getCurrentUser().getUid().equals(post.ownerID)) {
+            if(current_user.equals(post.ownerID)) {
                 delete_post.setVisibility(View.VISIBLE);
             }
 

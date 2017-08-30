@@ -12,7 +12,7 @@ import com.kawabanga.model.User;
  * this class handles the users' authentication using the firebase authentication
  */
 
-public class AuthenticationActivity extends Activity implements SignInFragment.SinginFragmentListener, RegisterFragment.RegisterFragmentListener {
+public class AuthenticationActivity extends Activity implements SignInFragment.LoginFragmentListener, RegisterFragment.RegisterFragmentListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class AuthenticationActivity extends Activity implements SignInFragment.S
     }
 
     @Override
-    public void onSignin() {
+    public void onLogin() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -43,7 +43,7 @@ public class AuthenticationActivity extends Activity implements SignInFragment.S
     @Override
     public void onRegisterSuccess(User user) {
         ModelUser.instance.addUser(user);
-        onSignin();
+        onLogin();
 
     }
 }

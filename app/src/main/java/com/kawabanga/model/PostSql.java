@@ -31,7 +31,6 @@ public class PostSql {
 
 
     static List<Post> getAllPosts(SQLiteDatabase db) {
-        Log.d("TAG", "post sql getallposts");
         Cursor cursor = db.query(POST_TABLE, null, null, null, null, null, null);
         return getListOfPostsFromCursor(cursor);
     }
@@ -121,7 +120,6 @@ public class PostSql {
     }
     public static List<Post> getListOfPostsFromCursor(Cursor cursor)
     {
-        Log.d("TAG", "post sql getlistofposts");
         List<Post> list = new LinkedList<Post>();
         if (cursor.moveToFirst()) {
             int idIndex = cursor.getColumnIndex(POST_ID);

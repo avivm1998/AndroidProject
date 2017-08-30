@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SinginFragmentListener} interface
+ * {@link LoginFragmentListener} interface
  * to handle interaction events.
  */
 
@@ -30,7 +30,7 @@ import com.google.firebase.auth.FirebaseAuth;
 * this class represent the fragment which responsible of signIn to the application*/
 public class SignInFragment extends Fragment {
 
-    private SinginFragmentListener mListener;
+    private LoginFragmentListener mListener;
     private FirebaseAuth mAuth;
 
     public SignInFragment() {
@@ -82,7 +82,7 @@ public class SignInFragment extends Fragment {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()) {
                                     Toast.makeText(getActivity(), "Logged in Successfully!", Toast.LENGTH_SHORT).show();
-                                    mListener.onSignin();
+                                    mListener.onLogin();
 
                                 }
                                 else {
@@ -101,8 +101,8 @@ public class SignInFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof SinginFragmentListener) {
-            mListener = (SinginFragmentListener) context;
+        if (context instanceof LoginFragmentListener) {
+            mListener = (LoginFragmentListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -112,8 +112,8 @@ public class SignInFragment extends Fragment {
     @Override
     public void onAttach(Activity context) {
         super.onAttach(context);
-        if (context instanceof SinginFragmentListener) {
-            mListener = (SinginFragmentListener) context;
+        if (context instanceof LoginFragmentListener) {
+            mListener = (LoginFragmentListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -136,8 +136,8 @@ public class SignInFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface SinginFragmentListener {
+    public interface LoginFragmentListener {
         void onRegisterClick();
-        void onSignin();
+        void onLogin();
     }
 }

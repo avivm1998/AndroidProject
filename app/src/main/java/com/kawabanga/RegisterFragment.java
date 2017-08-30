@@ -94,7 +94,7 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof SignInFragment.SinginFragmentListener) {
+        if (context instanceof SignInFragment.LoginFragmentListener) {
             mListener = (RegisterFragmentListener) context;
         } else {
             throw new RuntimeException(context.toString()
@@ -105,7 +105,7 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onAttach(Activity context) {
         super.onAttach(context);
-        if (context instanceof SignInFragment.SinginFragmentListener) {
+        if (context instanceof SignInFragment.LoginFragmentListener) {
             mListener = (RegisterFragmentListener) context;
         } else {
             throw new RuntimeException(context.toString()
@@ -118,9 +118,6 @@ public class RegisterFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
-
-
 
 
     public interface RegisterFragmentListener {

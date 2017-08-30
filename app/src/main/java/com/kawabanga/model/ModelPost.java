@@ -8,7 +8,6 @@ import android.webkit.URLUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.Collections;
 import java.util.List;
 
 import static com.kawabanga.model.ModelFiles.saveImageToFile;
@@ -25,8 +24,8 @@ public class ModelPost
             modelSql = new ModelSql(Kawabanga.getMyContext());
         }
 
-        private void synchPostsDbAndregisterPostsUpdates() {
-            //1. get local lastUpdateTade
+        private void syncPostsDatabaseAndRegisterPostsUpdates() {
+            //1. get local lastUpdateDate
             SharedPreferences pref = Kawabanga.getMyContext().getSharedPreferences("TAG", Context.MODE_PRIVATE);
             final double lastUpdateDate = pref.getFloat("PostsLastUpdateDate", 0);
             Log.d("TAG", "lastUpdateDate: " + lastUpdateDate);
@@ -46,7 +45,7 @@ public class ModelPost
                         else
                             PostSql.updatePost(modelSql.getWritableDatabase(), post);
                     }
-                    //4. update the lastUpdateTade
+                    //4. update the lastUpdateDate
                     SharedPreferences pref = Kawabanga.getMyContext().getSharedPreferences("TAG", Context.MODE_PRIVATE);
                     final double lastUpdateDate = pref.getFloat("PostsLastUpdateDate", 0);
                     if (lastUpdateDate < post.lastUpdateDate) {
@@ -68,7 +67,6 @@ public class ModelPost
         }
 
         public List<Post> getAllPosts() {
-            Log.d("TAG", "model post getallposts");
             return PostSql.getAllPosts(modelSql.getReadableDatabase());
         }
 
@@ -102,7 +100,7 @@ public interface SaveImageListener {
 
     public void RegisterUpdates()
     {
-        synchPostsDbAndregisterPostsUpdates();
+        syncPostsDatabaseAndRegisterPostsUpdates();
     }
 
     public void saveImage(final Bitmap imageBmp, final String name, final SaveImageListener listener) {
@@ -130,13 +128,15 @@ public interface GetImageListener{
     public void getImage(final String url, final GetImageListener listener) {
         //check if the image exists locally
         final String fileName = URLUtil.guessFileName(url, null, null);
-        ModelFiles.loadImageFromFileAsynch(fileName, new ModelFiles.LoadImageFromFileAsynch() {
+        ModelFiles.loadImageFromFileAsync(fileName, new ModelFiles.LoadImageFromFileAsync() {
             @Override
             public void onComplete(Bitmap bitmap) {
                 if (bitmap != null){
                     Log.d("TAG","getImage from local success " + fileName);
                     listener.onSuccess(bitmap);
-                }else {
+                }
+
+                else {
                     firebasePost.getImage(url, new GetImageListener() {
                         @Override
                         public void onSuccess(Bitmap image) {

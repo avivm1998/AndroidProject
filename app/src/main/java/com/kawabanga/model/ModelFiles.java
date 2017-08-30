@@ -29,7 +29,7 @@ public class ModelFiles {
             //if the file does'nt exist
             if (!dir.exists())
             {
-                dir.mkdir();
+                boolean ret = dir.mkdirs();
             }
 
             File imageFile = new File(dir,imageFileName);
@@ -39,7 +39,7 @@ public class ModelFiles {
             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.close();
 
-            addPicureToGallery(imageFile);
+            addPictureToGallery(imageFile);
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -49,11 +49,11 @@ public class ModelFiles {
         }
     }
 
-    interface LoadImageFromFileAsynch{
+    interface LoadImageFromFileAsync {
         void onComplete(Bitmap bitmap);
     }
-    static void loadImageFromFileAsynch(String imageFileName,
-                                        final LoadImageFromFileAsynch callback) {
+    static void loadImageFromFileAsync(String imageFileName,
+                                       final LoadImageFromFileAsync callback) {
         AsyncTask<String,String,Bitmap> task = new AsyncTask<String,String,Bitmap>(){
             @Override
             protected Bitmap doInBackground(String... params) {
@@ -79,16 +79,13 @@ public class ModelFiles {
             bitmap = BitmapFactory.decodeStream(inputStream);
             Log.d("tag","got image from cache: " + imageFileName);
         }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
         catch (IOException e) {
             e.printStackTrace();
         }
         return bitmap;
     }
 
-    private static void addPicureToGallery(File imageFile){
+    private static void addPictureToGallery(File imageFile){
         //add the picture to the gallery so we dont need to manage the cache size
         Intent mediaScanIntent = new
                 Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
