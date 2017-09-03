@@ -17,7 +17,6 @@ public class FirebaseUser {
         Map<String, Object> value = new HashMap<>();
         value.put("id", user.id);
         value.put("name", user.name);
-        value.put("description",user.description);
         myRef.child(user.id).setValue(value);
     }
 

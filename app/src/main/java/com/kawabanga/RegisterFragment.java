@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.kawabanga.model.User;
@@ -54,10 +55,13 @@ public class RegisterFragment extends Fragment {
         final EditText mailET = (EditText) view.findViewById(R.id.register_mail);
         final EditText passET = (EditText) view.findViewById(R.id.register_password);
         final EditText fullnameET = (EditText) view.findViewById(R.id.register_fullname);
+        final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.register_progressbar);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+
                 String mail = mailET.getText().toString();
                 String pass = passET.getText().toString();
                 String fullname = fullnameET.getText().toString();
@@ -76,6 +80,7 @@ public class RegisterFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()) {
+                                    progressBar.setVisibility(View.GONE);
                                     Toast.makeText(getActivity(), "Registered Successfully!", Toast.LENGTH_SHORT).show();
                                     u.id = mAuth.getCurrentUser().getUid();
                                     mListener.onRegisterSuccess(u);

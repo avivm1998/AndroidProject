@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -52,7 +53,7 @@ public class SignInFragment extends Fragment {
 
         final EditText mailET = (EditText) view.findViewById(R.id.signin_email);
         final EditText passwordET = (EditText) view.findViewById(R.id.signin_password);
-
+        final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.signin_progressbar);
         Button reisterB = (Button) view.findViewById(R.id.signin_register_button);
         Button signinB = (Button) view.findViewById(R.id.signin_login_button);
 
@@ -66,6 +67,8 @@ public class SignInFragment extends Fragment {
         signinB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+
                 String mail = mailET.getText().toString();
                 String pass = passwordET.getText().toString();
 
@@ -81,6 +84,7 @@ public class SignInFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()) {
+                                    progressBar.setVisibility(View.GONE);
                                     Toast.makeText(getActivity(), "Logged in Successfully!", Toast.LENGTH_SHORT).show();
                                     mListener.onLogin();
 
